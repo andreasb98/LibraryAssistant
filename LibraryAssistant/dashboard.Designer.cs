@@ -41,8 +41,8 @@ namespace LibraryAssistant
             this.btnMembers = new System.Windows.Forms.Button();
             this.btnBooks = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pnlFormLoader = new System.Windows.Forms.Panel();
             this.lblUser = new System.Windows.Forms.Label();
+            this.pnlFormLoader = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlSide.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -200,15 +200,6 @@ namespace LibraryAssistant
             this.panel1.Size = new System.Drawing.Size(186, 140);
             this.panel1.TabIndex = 6;
             // 
-            // pnlFormLoader
-            // 
-            this.pnlFormLoader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(243)))), ((int)(((byte)(250)))));
-            this.pnlFormLoader.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlFormLoader.Location = new System.Drawing.Point(186, 52);
-            this.pnlFormLoader.Name = "pnlFormLoader";
-            this.pnlFormLoader.Size = new System.Drawing.Size(765, 525);
-            this.pnlFormLoader.TabIndex = 6;
-            // 
             // lblUser
             // 
             this.lblUser.AutoSize = true;
@@ -218,7 +209,16 @@ namespace LibraryAssistant
             this.lblUser.Size = new System.Drawing.Size(60, 15);
             this.lblUser.TabIndex = 2;
             this.lblUser.Text = "Username";
-            this.lblUser.Click += new System.EventHandler(this.label1_Click);
+            this.lblUser.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pnlFormLoader
+            // 
+            this.pnlFormLoader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(243)))), ((int)(((byte)(250)))));
+            this.pnlFormLoader.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlFormLoader.Location = new System.Drawing.Point(186, 52);
+            this.pnlFormLoader.Name = "pnlFormLoader";
+            this.pnlFormLoader.Size = new System.Drawing.Size(765, 525);
+            this.pnlFormLoader.TabIndex = 6;
             // 
             // dashboard
             // 

@@ -7,6 +7,9 @@ using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
+using LibraryAssistant.Model.DTOs.Responses;
+using System.Net.Http.Headers;
+using LibraryAssistant.Configuration;
 
 namespace LibraryAssistant
 {
@@ -17,11 +20,15 @@ namespace LibraryAssistant
         static readonly string bookAddress = "https://localhost:44390/api/Books/";
         static readonly string memberAddress = "https://localhost:44390/api/Members/";
         static readonly string authAddress = "https://localhost:44390/api/AuthManagement/";
+         
 
         //GET All books
-        public async Task<List<Book>> GetBooks()
+        public async Task<List<Book>> GetBooks(string token)
         {
+            
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var post = await client.GetFromJsonAsync<List<Book>>(bookAddress);
+            
             Console.WriteLine("Executed GetBooks()");
             return post;
         }
@@ -112,8 +119,23 @@ namespace LibraryAssistant
         }
 
         public async Task Login(Member member)
-        {
+        {           
             await client.PostAsJsonAsync(authAddress + "Login", member);
+            
+            
+            
+        }
+
+        public async Task<string> Authorize(Member member)
+        {
+            AuthResult authResult = new AuthResult();
+            var response = await client.PostAsJsonAsync(authAddress + "Login", member);
+            if (response.IsSuccessStatusCode)
+            {
+                authResult = response.Content.ReadAsAsync<AuthResult>().Result;
+                System.Diagnostics.Debug.WriteLine(authResult.Token.ToString());
+            }
+            return authResult.Token;
         }
     }
 }

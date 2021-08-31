@@ -16,6 +16,11 @@ namespace LibraryAssistant
     public partial class dashboard : Form
     {
         LibraryService LibraryService = new LibraryService();
+        string accessToken = "";
+        public string userEmail = "";
+        public string userName = "";
+        public string userPassword = "";
+        Member member = new Member();
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(
@@ -41,12 +46,21 @@ namespace LibraryAssistant
             frmDashboard FrmDashboard_ = new frmDashboard() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             FrmDashboard_.FormBorderStyle = FormBorderStyle.None;
             this.pnlFormLoader.Controls.Add(FrmDashboard_);
-            FrmDashboard_.Show();
+            FrmDashboard_.Show();           
+
+            
         }
 
-        private void dashboard_Load(object sender, EventArgs e)
+        private async void dashboard_Load(object sender, EventArgs e)
         {
-            //lblUser.Text = brukernavn
+            
+
+            //member.Email = "5@online.com";
+            //member.password = "Jepp123*";
+            member.password = userPassword;
+            member.Email = userEmail;
+            lblUser.Text = member.Email;
+            accessToken = await LibraryService.Authorize(member);
         }
 
 
@@ -92,14 +106,12 @@ namespace LibraryAssistant
             this.pnlFormLoader.Controls.Add(FrmDashboard_);
             FrmDashboard_.Show();
 
-            var temp = await LibraryService.GetBooks();
-
-            foreach (var item in temp)
+            var temp2 = await LibraryService.GetBooks(accessToken);
+            foreach (var item in temp2)
             {
-                System.Diagnostics.Debug.WriteLine($"{item.Id}, {item.Title}");
+                System.Diagnostics.Debug.WriteLine(item.Publisher, item.Title);
             }
 
-            //await LibraryService.GetMembers();
 
 
         }
@@ -116,10 +128,9 @@ namespace LibraryAssistant
             frmMembers FrmMemberrs_ = new frmMembers() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             FrmMemberrs_.FormBorderStyle = FormBorderStyle.None;
             this.pnlFormLoader.Controls.Add(FrmMemberrs_);
-            FrmMemberrs_.Show();
-
-            var temp2 = await LibraryService.GetBook(2);
-            System.Diagnostics.Debug.WriteLine($"{temp2.Id}, {temp2.Title}");
+            FrmMemberrs_.Show();                     
+            
+            
         }
 
         private async void btnSettings_Click(object sender, EventArgs e)
@@ -145,6 +156,11 @@ namespace LibraryAssistant
 
         private void btnlogout_Click(object sender, EventArgs e)
         {
+            member.Name = "";
+            member.password = "";
+            member.Email = "";
+            member.Id = 0;
+            member.Mobile = "";
             new formLogin().Show();
             this.Hide();
         }
@@ -154,9 +170,5 @@ namespace LibraryAssistant
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LibraryAssistant.Model;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +14,8 @@ namespace LibraryAssistant
 {
     public partial class formLogin : Form
     {
+        
+        LibraryService libraryService = new LibraryService();
         public formLogin()
         {
             InitializeComponent();
@@ -33,14 +37,39 @@ namespace LibraryAssistant
 
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private async void btnLogin_Click(object sender, EventArgs e)
         {
-            /*If login success
-             * {
-             *      new dashboard
-             * }*/
-            new dashboard().Show();
-            this.Hide();
+            Member member = new Member();
+            if (txtPassword.Text == "" || txtEmail.Text == "")
+            {
+                MessageBox.Show("Please enter all fields", "Login failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                try
+                {
+                    member.Email = txtEmail.Text;
+                    member.password = txtPassword.Text;
+
+                    await libraryService.Login(member);
+                    dashboard dashB = new dashboard()
+                    {
+                        userName = member.Name,
+                        userEmail = member.Email,
+                        userPassword = member.password
+                    };
+                    dashB.Show();
+                    this.Hide();
+
+
+                }
+                catch (Exception er)
+                {
+
+                }
+            }
+            
+                
             /*else
              {
                     MessageBox.Show("Invalid email or password", "Login failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
