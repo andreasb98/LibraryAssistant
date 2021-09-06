@@ -10,18 +10,27 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Net.Http;
 using LibraryAssistant.Model;
+using LibraryAssistant.Configuration;
+using LibraryAssistant.Model.DTOs;
 
 namespace LibraryAssistant
 {
     public partial class dashboard : Form
     {
         LibraryService LibraryService = new LibraryService();
-        string accessToken = "";
+        public string accessToken = "";
+        public AuthResult authTokens;
+        
+        string authToken = "";
         public string userEmail = "";
         public string userName = "";
         public string userPassword = "";
         Member member = new Member();
 
+        public TokenRequest tokenRequest;
+
+
+        //Runde kanter
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(
             int nLeftRect,
@@ -31,36 +40,35 @@ namespace LibraryAssistant
             int nWithEllipse,
             int nHeightEllipse);
 
-        public dashboard()
+        public dashboard(AuthResult authTokens, TokenRequest _tokenRequest)
         {
             InitializeComponent();
+            authToken = authTokens.Token;
+            var tokenRequest = _tokenRequest;
+           
 
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
             pnlNav.Height = btnBooks.Height;
             pnlNav.Top = btnBooks.Top;
             pnlNav.Left = btnBooks.Left;
 
-
-            lblTitle.Text = "Books";
+            
             this.pnlFormLoader.Controls.Clear();
-            frmDashboard FrmDashboard_ = new frmDashboard() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+
+            tokenRequest.Token = authTokens.Token;
+            tokenRequest.RefreshToken = authTokens.RefreshToken;
+            frmDashboard FrmDashboard_ = new frmDashboard(authTokens, tokenRequest) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             FrmDashboard_.FormBorderStyle = FormBorderStyle.None;
             this.pnlFormLoader.Controls.Add(FrmDashboard_);
-            FrmDashboard_.Show();           
-
-            
+            FrmDashboard_.Show();       
         }
 
-        private async void dashboard_Load(object sender, EventArgs e)
-        {
-            
-
-            //member.Email = "5@online.com";
-            //member.password = "Jepp123*";
-            member.password = userPassword;
+        private void dashboard_Load(object sender, EventArgs e)
+        {           
             member.Email = userEmail;
             lblUser.Text = member.Email;
-            accessToken = await LibraryService.Authorize(member);
+            member.password = userPassword;
+            member.Token = accessToken;         
         }
 
 
@@ -81,9 +89,16 @@ namespace LibraryAssistant
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Program exited from button");
-            System.Diagnostics.Debug.WriteLine("Program exited from button");
-            Application.Exit();
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to exit?", "Exit Application", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                Console.WriteLine("Program exited from button");
+                Application.Exit();
+            }
+            else if (dialogResult == DialogResult.No || dialogResult == DialogResult.Cancel)
+            {
+                //Not exiting
+            }
         }
 
        
@@ -91,39 +106,63 @@ namespace LibraryAssistant
         
 
 
-        private  async void btnBooks_Click(object sender, EventArgs e)
+        private async void btnBooks_Click(object sender, EventArgs e)
         {
+            lblPanelTitle.Text = "Books";
             pnlNav.Height = btnBooks.Height;
             pnlNav.Top = btnBooks.Top;
             pnlNav.Left = btnBooks.Left;
             btnBooks.BackColor = Color.FromArgb(106, 177, 135);
 
-
-            lblTitle.Text = "Books";
+            
             this.pnlFormLoader.Controls.Clear();
-            frmDashboard FrmDashboard_ = new frmDashboard() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-            FrmDashboard_.FormBorderStyle = FormBorderStyle.None;
-            this.pnlFormLoader.Controls.Add(FrmDashboard_);
-            FrmDashboard_.Show();
 
-            var temp2 = await LibraryService.GetBooks(accessToken);
-            foreach (var item in temp2)
+            try
             {
-                System.Diagnostics.Debug.WriteLine(item.Publisher, item.Title);
+                tokenRequest = await LibraryService.Toooken(member);
+                frmDashboard FrmDashboard_ = new frmDashboard(authTokens, tokenRequest)
+                {
+                    Dock = DockStyle.Fill,
+                    TopLevel = false,
+                    TopMost = true
+                };
+                FrmDashboard_.FormBorderStyle = FormBorderStyle.None;
+                this.pnlFormLoader.Controls.Add(FrmDashboard_);
+                FrmDashboard_.MaximizeBox = false;
+                FrmDashboard_.MinimizeBox = false;
+                FrmDashboard_.ShowInTaskbar = false;
+                FrmDashboard_.Show();
             }
+            catch (Exception ee)
+            {
+                tokenRequest = await LibraryService.Toooken(member);
+                frmDashboard FrmDashboard_ = new frmDashboard(authTokens, tokenRequest)
+                {
+                    Dock = DockStyle.Fill,
+                    TopLevel = false,
+                    TopMost = true
+                };
+                FrmDashboard_.FormBorderStyle = FormBorderStyle.None;
+                this.pnlFormLoader.Controls.Add(FrmDashboard_);
+                FrmDashboard_.Show();
+            }
+            
+            
+
 
 
 
         }
 
-        private async void btnMembers_Click(object sender, EventArgs e)
+        private void btnMembers_Click(object sender, EventArgs e)
         {
+            lblPanelTitle.Text = "Members";
             pnlNav.Height = btnMembers.Height;
             pnlNav.Top = btnMembers.Top;
             pnlNav.Left = btnMembers.Left;
             btnMembers.BackColor = Color.FromArgb(106, 177, 135);
 
-            lblTitle.Text = "Members";
+            
             this.pnlFormLoader.Controls.Clear();
             frmMembers FrmMemberrs_ = new frmMembers() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             FrmMemberrs_.FormBorderStyle = FormBorderStyle.None;
@@ -133,23 +172,20 @@ namespace LibraryAssistant
             
         }
 
-        private async void btnSettings_Click(object sender, EventArgs e)
+        private void btnSettings_Click(object sender, EventArgs e)
         {
+            lblPanelTitle.Text = "Settings";
             pnlNav.Height = btnSettings.Height;
             pnlNav.Top = btnSettings.Top;
             pnlNav.Left = btnSettings.Left;
             btnSettings.BackColor = Color.FromArgb(106, 177, 135);
 
-            lblTitle.Text = "Settings";
+            
             this.pnlFormLoader.Controls.Clear();
             frmSettings FrmSettings_ = new frmSettings() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             FrmSettings_.FormBorderStyle = FormBorderStyle.None;
             this.pnlFormLoader.Controls.Add(FrmSettings_);
             FrmSettings_.Show();
-
-          
-
-            await LibraryService.DeleteBook(1);
         }
 
        
@@ -161,14 +197,18 @@ namespace LibraryAssistant
             member.Email = "";
             member.Id = 0;
             member.Mobile = "";
+            member.Token = "";
             new formLogin().Show();
             this.Hide();
         }
 
-        private void txtUsername_Click(object sender, EventArgs e)
-        {
+      
 
-        }
+      
+        
+            
+
+        
 
     }
 }

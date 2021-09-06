@@ -17,7 +17,7 @@ namespace LibraryAssistant
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new formRegister());
+            Application.Run(new formLogin());
 
             
 

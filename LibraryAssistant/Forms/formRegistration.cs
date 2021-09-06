@@ -46,15 +46,17 @@ namespace LibraryAssistant
                     
                     clearFields();
                     MessageBox.Show("Account successfully created", "Registration success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    var generateToken = await libraryservice.Authorize(member);
                     await libraryservice.Login(member);
-                    dashboard dashB = new dashboard()
+                    /*dashboard dashB = new dashboard(generateToken)
                     {
                         userName = member.Name,
                         userEmail = member.Email,
-                        userPassword = member.password
+                        userPassword = member.password,
+                        //accessToken = generateToken
                     };
                     dashB.Show();
-                    this.Hide();
+                    this.Hide();*/
                 }
                 catch (Exception eg)
                 {

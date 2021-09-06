@@ -1,4 +1,5 @@
 ﻿using LibraryAssistant.Model;
+using LibraryAssistant.Model.DTOs;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
@@ -14,11 +15,13 @@ namespace LibraryAssistant
 {
     public partial class formLogin : Form
     {
-        
+    
         LibraryService libraryService = new LibraryService();
         public formLogin()
         {
             InitializeComponent();
+            
+            
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -50,13 +53,17 @@ namespace LibraryAssistant
                 {
                     member.Email = txtEmail.Text;
                     member.password = txtPassword.Text;
+                    var generateToken = await libraryService.Authorize(member);
+                    var tokenRequest = await libraryService.Toooken(member);
+                    
 
                     await libraryService.Login(member);
-                    dashboard dashB = new dashboard()
+                    dashboard dashB = new dashboard(generateToken, tokenRequest)
                     {
                         userName = member.Name,
                         userEmail = member.Email,
-                        userPassword = member.password
+                        userPassword = member.password,
+                        //accessToken = generateToken
                     };
                     dashB.Show();
                     this.Hide();

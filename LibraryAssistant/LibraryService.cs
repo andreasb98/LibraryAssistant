@@ -10,6 +10,7 @@ using System.Text.Json;
 using LibraryAssistant.Model.DTOs.Responses;
 using System.Net.Http.Headers;
 using LibraryAssistant.Configuration;
+using LibraryAssistant.Model.DTOs;
 
 namespace LibraryAssistant
 {
@@ -126,7 +127,7 @@ namespace LibraryAssistant
             
         }
 
-        public async Task<string> Authorize(Member member)
+        public async Task<AuthResult> Authorize(Member member)
         {
             AuthResult authResult = new AuthResult();
             var response = await client.PostAsJsonAsync(authAddress + "Login", member);
@@ -135,7 +136,31 @@ namespace LibraryAssistant
                 authResult = response.Content.ReadAsAsync<AuthResult>().Result;
                 System.Diagnostics.Debug.WriteLine(authResult.Token.ToString());
             }
-            return authResult.Token;
+            return authResult;
+        }
+
+        public async Task<TokenRequest> Toooken(Member member)
+        {
+            TokenRequest toooken = new TokenRequest();
+            var response = await client.PostAsJsonAsync(authAddress + "Login", member);
+            if (response.IsSuccessStatusCode)
+            {
+                toooken = response.Content.ReadAsAsync<TokenRequest>().Result;
+                System.Diagnostics.Debug.WriteLine(toooken.Token.ToString());
+            }
+            return toooken;
+        }
+
+        public async Task<AuthResult> RefreshToken(TokenRequest tokenRequest)
+        {
+            AuthResult authResult = new AuthResult();
+            var response = await client.PostAsJsonAsync(authAddress + "RefreshToken", tokenRequest);
+            if (response.IsSuccessStatusCode)
+            {
+                authResult = response.Content.ReadAsAsync<AuthResult>().Result;
+                System.Diagnostics.Debug.WriteLine("Token is refreshed");
+            }
+            return authResult;
         }
     }
 }

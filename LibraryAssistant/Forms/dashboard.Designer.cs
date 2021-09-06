@@ -33,7 +33,6 @@ namespace LibraryAssistant
             this.pnlNav = new System.Windows.Forms.Panel();
             this.txtUsername = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lblTitle = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.pnlSide = new System.Windows.Forms.Panel();
             this.btnLogout = new System.Windows.Forms.Button();
@@ -43,9 +42,12 @@ namespace LibraryAssistant
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblUser = new System.Windows.Forms.Label();
             this.pnlFormLoader = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lblPanelTitle = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlSide.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlNav
@@ -66,7 +68,6 @@ namespace LibraryAssistant
             this.txtUsername.Size = new System.Drawing.Size(118, 19);
             this.txtUsername.TabIndex = 1;
             this.txtUsername.Text = "Library Assistant";
-            this.txtUsername.Click += new System.EventHandler(this.txtUsername_Click);
             // 
             // pictureBox1
             // 
@@ -78,23 +79,12 @@ namespace LibraryAssistant
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // lblTitle
-            // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Nirmala UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblTitle.ForeColor = System.Drawing.Color.Black;
-            this.lblTitle.Location = new System.Drawing.Point(192, 9);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(78, 32);
-            this.lblTitle.TabIndex = 3;
-            this.lblTitle.Text = "Books";
-            // 
             // btnClose
             // 
             this.btnClose.FlatAppearance.BorderSize = 0;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.ForeColor = System.Drawing.Color.Gray;
-            this.btnClose.Location = new System.Drawing.Point(914, 12);
+            this.btnClose.Location = new System.Drawing.Point(737, 3);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(25, 25);
             this.btnClose.TabIndex = 4;
@@ -215,10 +205,30 @@ namespace LibraryAssistant
             // 
             this.pnlFormLoader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(243)))), ((int)(((byte)(250)))));
             this.pnlFormLoader.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlFormLoader.Location = new System.Drawing.Point(186, 52);
+            this.pnlFormLoader.Location = new System.Drawing.Point(186, 140);
             this.pnlFormLoader.Name = "pnlFormLoader";
-            this.pnlFormLoader.Size = new System.Drawing.Size(765, 525);
+            this.pnlFormLoader.Size = new System.Drawing.Size(765, 437);
             this.pnlFormLoader.TabIndex = 6;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(58)))), ((int)(((byte)(70)))));
+            this.panel2.Controls.Add(this.btnClose);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(186, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(765, 33);
+            this.panel2.TabIndex = 7;
+            // 
+            // lblPanelTitle
+            // 
+            this.lblPanelTitle.AutoSize = true;
+            this.lblPanelTitle.Font = new System.Drawing.Font("Microsoft YaHei", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblPanelTitle.Location = new System.Drawing.Point(193, 40);
+            this.lblPanelTitle.Name = "lblPanelTitle";
+            this.lblPanelTitle.Size = new System.Drawing.Size(56, 28);
+            this.lblPanelTitle.TabIndex = 8;
+            this.lblPanelTitle.Text = "Title";
             // 
             // dashboard
             // 
@@ -226,11 +236,12 @@ namespace LibraryAssistant
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(243)))), ((int)(((byte)(250)))));
             this.ClientSize = new System.Drawing.Size(951, 577);
+            this.Controls.Add(this.lblPanelTitle);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.pnlFormLoader);
             this.Controls.Add(this.pnlSide);
-            this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.lblTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximizeBox = false;
             this.Name = "dashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "dashboard";
@@ -239,6 +250,7 @@ namespace LibraryAssistant
             this.pnlSide.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -246,7 +258,6 @@ namespace LibraryAssistant
 
         #endregion
         private System.Windows.Forms.Panel pnlNav;
-        private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label txtUsername;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -258,5 +269,7 @@ namespace LibraryAssistant
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel pnlFormLoader;
         private System.Windows.Forms.Label lblUser;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label lblPanelTitle;
     }
 }
