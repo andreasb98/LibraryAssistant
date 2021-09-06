@@ -139,16 +139,16 @@ namespace LibraryAssistant
             return authResult;
         }
 
-        public async Task<TokenRequest> Toooken(Member member)
+        public async Task<TokenRequest> RefreshTokenRequest(Member member)
         {
-            TokenRequest toooken = new TokenRequest();
+            TokenRequest refToken = new TokenRequest();
             var response = await client.PostAsJsonAsync(authAddress + "Login", member);
             if (response.IsSuccessStatusCode)
             {
-                toooken = response.Content.ReadAsAsync<TokenRequest>().Result;
-                System.Diagnostics.Debug.WriteLine(toooken.Token.ToString());
+                refToken = response.Content.ReadAsAsync<TokenRequest>().Result;
+                System.Diagnostics.Debug.WriteLine(refToken.Token.ToString());
             }
-            return toooken;
+            return refToken;
         }
 
         public async Task<AuthResult> RefreshToken(TokenRequest tokenRequest)

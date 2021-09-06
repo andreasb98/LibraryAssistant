@@ -119,7 +119,7 @@ namespace LibraryAssistant
 
             try
             {
-                tokenRequest = await LibraryService.Toooken(member);
+                tokenRequest = await LibraryService.RefreshTokenRequest(member);
                 frmDashboard FrmDashboard_ = new frmDashboard(authTokens, tokenRequest)
                 {
                     Dock = DockStyle.Fill,
@@ -135,7 +135,7 @@ namespace LibraryAssistant
             }
             catch (Exception ee)
             {
-                tokenRequest = await LibraryService.Toooken(member);
+                tokenRequest = await LibraryService.RefreshTokenRequest(member);
                 frmDashboard FrmDashboard_ = new frmDashboard(authTokens, tokenRequest)
                 {
                     Dock = DockStyle.Fill,

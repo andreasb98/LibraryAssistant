@@ -54,7 +54,7 @@ namespace LibraryAssistant
                     member.Email = txtEmail.Text;
                     member.password = txtPassword.Text;
                     var generateToken = await libraryService.Authorize(member);
-                    var tokenRequest = await libraryService.Toooken(member);
+                    var tokenRequest = await libraryService.RefreshTokenRequest(member);
                     
 
                     await libraryService.Login(member);
