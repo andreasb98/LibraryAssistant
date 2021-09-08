@@ -15,13 +15,11 @@ namespace LibraryAssistant
 {
     public partial class formLogin : Form
     {
-    
+
         LibraryService libraryService = new LibraryService();
         public formLogin()
         {
             InitializeComponent();
-            
-            
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -49,40 +47,41 @@ namespace LibraryAssistant
             }
             else
             {
+                member.Email = txtEmail.Text;
+                member.password = txtPassword.Text;
+                
+
                 try
-                {
-                    member.Email = txtEmail.Text;
-                    member.password = txtPassword.Text;
+                {             
                     var generateToken = await libraryService.Authorize(member);
                     var tokenRequest = await libraryService.RefreshTokenRequest(member);
-                    
 
-                    await libraryService.Login(member);
-                    dashboard dashB = new dashboard(generateToken, tokenRequest)
+
+                    var response = await libraryService.Login(member);
+                    if (response.IsSuccessStatusCode)
                     {
-                        userName = member.Name,
-                        userEmail = member.Email,
-                        userPassword = member.password,
-                        //accessToken = generateToken
-                    };
-                    dashB.Show();
-                    this.Hide();
-
+                        dashboard dashB = new dashboard(generateToken, tokenRequest)
+                        {
+                            userName = member.Name,
+                            userEmail = member.Email,
+                            userPassword = member.password,
+                        };
+                        dashB.Show();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid email or password", "Login failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtPassword.Text = "";
+                    }                    
 
                 }
                 catch (Exception er)
                 {
+                    MessageBox.Show("There was an error: " + er.ToString(), "Login failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }              
 
-                }
             }
-            
-                
-            /*else
-             {
-                    MessageBox.Show("Invalid email or password", "Login failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txtPassword.Text = "";
-            }
-            */
         }
 
         private void btnClear_Click(object sender, EventArgs e)

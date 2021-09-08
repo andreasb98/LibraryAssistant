@@ -28,10 +28,6 @@ namespace LibraryAssistant
         public frmDashboard(AuthResult authTokens, TokenRequest _tokenRequest)
         {
             InitializeComponent();
-            
-
-            System.Diagnostics.Debug.WriteLine("Innom Initialize");
-            
 
             dt.Columns.Add("ID");
             dt.Columns.Add("Title");
@@ -40,10 +36,6 @@ namespace LibraryAssistant
             dt.Columns.Add("Available");
             DataView dv = new DataView(dt);
             dataGridView1.DataSource = dv;
-
-            
-
-
 
 
             tokenRequest = _tokenRequest;
@@ -58,7 +50,6 @@ namespace LibraryAssistant
 
         private void frmDashboard_Load(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Innom frmDashboard_LOAD");
 
         }
 
@@ -70,14 +61,11 @@ namespace LibraryAssistant
 
         private async void onLoad(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("Innom onLoad");
             authTokens = await libraryService.RefreshToken(tokenRequest);
             List<Book> liste = await libraryService.GetBooks(authTokens.Token);
             foreach (var item in liste)
             {
                 dt.Rows.Add(item.Id, item.Title, item.Author, item.Publisher, item.IsAvail);
-                System.Diagnostics.Debug.WriteLine(item.Publisher, item.Title);
-
             }
         }
 
@@ -85,16 +73,16 @@ namespace LibraryAssistant
         {
             //Column Width
             dataGridView1.Columns[0].Width = 69;
-            dataGridView1.Columns[1].Width = 217;
+            dataGridView1.Columns[1].Width = 240;
             dataGridView1.Columns[2].Width = 189;
             dataGridView1.Columns[3].Width = 189;
-            dataGridView1.Columns[4].Width = 69;
+            dataGridView1.Columns[4].Width = 74;
 
-            dataGridView1.RowsDefaultCellStyle.BackColor = Color.Bisque;
-            dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
+            dataGridView1.RowsDefaultCellStyle.BackColor = Color.FromArgb(230, 233, 239);
+            dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(241, 243, 250);
 
             dataGridView1.BorderStyle = BorderStyle.None;
-            // FARGE I MELLOM SLAGA dataGridView1.GridColor = null;
+            
 
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.None;
             //dataGridView1.DefaultCellStyle.Font = new Font("Tahoma", 12);

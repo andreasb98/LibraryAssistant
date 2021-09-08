@@ -205,9 +205,9 @@ namespace LibraryAssistant
             // 
             this.pnlFormLoader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(243)))), ((int)(((byte)(250)))));
             this.pnlFormLoader.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlFormLoader.Location = new System.Drawing.Point(186, 140);
+            this.pnlFormLoader.Location = new System.Drawing.Point(186, 88);
             this.pnlFormLoader.Name = "pnlFormLoader";
-            this.pnlFormLoader.Size = new System.Drawing.Size(765, 437);
+            this.pnlFormLoader.Size = new System.Drawing.Size(765, 489);
             this.pnlFormLoader.TabIndex = 6;
             // 
             // panel2
@@ -219,6 +219,9 @@ namespace LibraryAssistant
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(765, 33);
             this.panel2.TabIndex = 7;
+            this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Mouse_Down);
+            this.panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Mouse_Move);
+            this.panel2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Mouse_Up);
             // 
             // lblPanelTitle
             // 

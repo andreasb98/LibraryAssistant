@@ -19,7 +19,7 @@ namespace LibraryAssistant
         public frmSettings()
         {
             InitializeComponent();
-            label1.Text = "Seeeeettings";
+            
         }
 
      

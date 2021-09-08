@@ -111,20 +111,17 @@ namespace LibraryAssistant
             try
             {
                 await client.PostAsJsonAsync(authAddress + "Register", member);
-                System.Diagnostics.Debug.WriteLine("Dette skjer");
             }
             catch (Exception e)
             {
-                System.Diagnostics.Debug.WriteLine("Feil" + e.ToString());
+                System.Diagnostics.Debug.WriteLine("Error: " + e.ToString());
             }
         }
 
-        public async Task Login(Member member)
-        {           
-            await client.PostAsJsonAsync(authAddress + "Login", member);
-            
-            
-            
+        public async Task<HttpResponseMessage> Login(Member member)
+        {
+            HttpResponseMessage response = await client.PostAsJsonAsync(authAddress + "Login", member);
+            return response;            
         }
 
         public async Task<AuthResult> Authorize(Member member)
