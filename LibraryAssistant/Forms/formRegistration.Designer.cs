@@ -77,7 +77,7 @@ namespace LibraryAssistant
             this.txtName.Multiline = true;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(216, 28);
-            this.txtName.TabIndex = 2;
+            this.txtName.TabIndex = 1;
             // 
             // label3
             // 
@@ -99,7 +99,7 @@ namespace LibraryAssistant
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '●';
             this.txtPassword.Size = new System.Drawing.Size(216, 28);
-            this.txtPassword.TabIndex = 2;
+            this.txtPassword.TabIndex = 4;
             this.txtPassword.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label4
@@ -122,7 +122,7 @@ namespace LibraryAssistant
             this.txtConfirmPassword.Name = "txtConfirmPassword";
             this.txtConfirmPassword.PasswordChar = '●';
             this.txtConfirmPassword.Size = new System.Drawing.Size(216, 28);
-            this.txtConfirmPassword.TabIndex = 2;
+            this.txtConfirmPassword.TabIndex = 5;
             this.txtConfirmPassword.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // checkbxShowPassword
@@ -133,7 +133,7 @@ namespace LibraryAssistant
             this.checkbxShowPassword.Location = new System.Drawing.Point(136, 352);
             this.checkbxShowPassword.Name = "checkbxShowPassword";
             this.checkbxShowPassword.Size = new System.Drawing.Size(119, 21);
-            this.checkbxShowPassword.TabIndex = 3;
+            this.checkbxShowPassword.TabIndex = 6;
             this.checkbxShowPassword.Text = "Show Password";
             this.checkbxShowPassword.UseVisualStyleBackColor = true;
             this.checkbxShowPassword.CheckedChanged += new System.EventHandler(this.checkbxShowPassword_CheckedChanged);
@@ -148,7 +148,7 @@ namespace LibraryAssistant
             this.btnRegister.Location = new System.Drawing.Point(37, 389);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(216, 35);
-            this.btnRegister.TabIndex = 4;
+            this.btnRegister.TabIndex = 7;
             this.btnRegister.Text = "Register";
             this.btnRegister.UseVisualStyleBackColor = false;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
@@ -162,7 +162,7 @@ namespace LibraryAssistant
             this.btnClear.Location = new System.Drawing.Point(37, 439);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(216, 35);
-            this.btnClear.TabIndex = 4;
+            this.btnClear.TabIndex = 8;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
@@ -184,7 +184,7 @@ namespace LibraryAssistant
             this.labelLogin.Location = new System.Drawing.Point(114, 514);
             this.labelLogin.Name = "labelLogin";
             this.labelLogin.Size = new System.Drawing.Size(43, 17);
-            this.labelLogin.TabIndex = 5;
+            this.labelLogin.TabIndex = 9;
             this.labelLogin.Text = "Login";
             this.labelLogin.Click += new System.EventHandler(this.labelLogin_Click);
             // 
@@ -206,7 +206,7 @@ namespace LibraryAssistant
             this.txtPhone.Multiline = true;
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(216, 28);
-            this.txtPhone.TabIndex = 2;
+            this.txtPhone.TabIndex = 3;
             // 
             // lblEmail
             // 

@@ -29,20 +29,19 @@ namespace LibraryAssistant
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.dataGridViewMember = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMember)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // dataGridViewMember
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.White;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(327, 152);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(196, 37);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Members Form";
+            this.dataGridViewMember.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewMember.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewMember.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewMember.Name = "dataGridViewMember";
+            this.dataGridViewMember.RowTemplate.Height = 25;
+            this.dataGridViewMember.Size = new System.Drawing.Size(733, 477);
+            this.dataGridViewMember.TabIndex = 0;
             // 
             // frmMembers
             // 
@@ -50,17 +49,18 @@ namespace LibraryAssistant
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(733, 477);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.dataGridViewMember);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmMembers";
             this.Text = "frmMembers";
+            this.Load += new System.EventHandler(this.onLoad);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMember)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dataGridViewMember;
     }
 }

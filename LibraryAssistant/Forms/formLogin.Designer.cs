@@ -49,7 +49,7 @@ namespace LibraryAssistant
             this.labelLogin.Location = new System.Drawing.Point(91, 415);
             this.labelLogin.Name = "labelLogin";
             this.labelLogin.Size = new System.Drawing.Size(101, 17);
-            this.labelLogin.TabIndex = 16;
+            this.labelLogin.TabIndex = 6;
             this.labelLogin.Text = "Create Account";
             this.labelLogin.Click += new System.EventHandler(this.labelLogin_Click);
             // 
@@ -72,7 +72,7 @@ namespace LibraryAssistant
             this.btnClear.Location = new System.Drawing.Point(37, 340);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(216, 35);
-            this.btnClear.TabIndex = 14;
+            this.btnClear.TabIndex = 5;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
@@ -87,7 +87,7 @@ namespace LibraryAssistant
             this.btnLogin.Location = new System.Drawing.Point(37, 289);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(216, 35);
-            this.btnLogin.TabIndex = 15;
+            this.btnLogin.TabIndex = 4;
             this.btnLogin.Text = "Log in";
             this.btnLogin.UseVisualStyleBackColor = false;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
@@ -100,7 +100,7 @@ namespace LibraryAssistant
             this.checkbxShowPassword.Location = new System.Drawing.Point(134, 239);
             this.checkbxShowPassword.Name = "checkbxShowPassword";
             this.checkbxShowPassword.Size = new System.Drawing.Size(119, 21);
-            this.checkbxShowPassword.TabIndex = 13;
+            this.checkbxShowPassword.TabIndex = 3;
             this.checkbxShowPassword.Text = "Show Password";
             this.checkbxShowPassword.UseVisualStyleBackColor = true;
             this.checkbxShowPassword.CheckedChanged += new System.EventHandler(this.checkbxShowPassword_CheckedChanged);
@@ -115,7 +115,7 @@ namespace LibraryAssistant
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '●';
             this.txtPassword.Size = new System.Drawing.Size(216, 28);
-            this.txtPassword.TabIndex = 11;
+            this.txtPassword.TabIndex = 2;
             // 
             // txtEmail
             // 
@@ -126,7 +126,7 @@ namespace LibraryAssistant
             this.txtEmail.Multiline = true;
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(216, 28);
-            this.txtEmail.TabIndex = 12;
+            this.txtEmail.TabIndex = 1;
             // 
             // label3
             // 

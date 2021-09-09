@@ -42,22 +42,35 @@ namespace LibraryAssistant
                 try
                 {                   
                     await libraryservice.RegisterAccount(member);
-                    await libraryservice.PostMember(member);
                     
-                    clearFields();
-                    MessageBox.Show("Account successfully created", "Registration success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
+                    
                     var generateToken = await libraryservice.Authorize(member);
                     var tokenRequest = await libraryservice.RefreshTokenRequest(member);
-                    await libraryservice.Login(member);
-                    dashboard dashB = new dashboard(generateToken, tokenRequest)
+                    var response = await libraryservice.Login(member);
+
+                    if (response.IsSuccessStatusCode)
                     {
-                        userName = member.Name,
-                        userEmail = member.Email,
-                        userPassword = member.password,
-                        //accessToken = generateToken
-                    };
-                    dashB.Show();
-                    this.Hide();
+                        await libraryservice.PostMember(member);
+                        clearFields();
+                        MessageBox.Show("Account successfully created", "Registration success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        dashboard dashB = new dashboard(generateToken, tokenRequest)
+                        {
+                            userName = member.Name,
+                            userEmail = member.Email,
+                            userPassword = member.password,
+                            //accessToken = generateToken
+                        };
+                        dashB.Show();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("An error has occured", "Registration failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txtPassword.Text = "";
+                        txtConfirmPassword.Text = "";
+                    }
+                    
                 }
                 catch (Exception eg)
                 {

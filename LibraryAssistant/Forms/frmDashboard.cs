@@ -23,7 +23,6 @@ namespace LibraryAssistant
         AuthResult authTokens;
         DataTable dt = new DataTable();
         TokenRequest tokenRequest = new TokenRequest();
-        public List<Book> bookList = new List<Book>();
       
         public frmDashboard(AuthResult authTokens, TokenRequest _tokenRequest)
         {
@@ -62,8 +61,8 @@ namespace LibraryAssistant
         private async void onLoad(object sender, EventArgs e)
         {
             authTokens = await libraryService.RefreshToken(tokenRequest);
-            List<Book> liste = await libraryService.GetBooks(authTokens.Token);
-            foreach (var item in liste)
+            List<Book> bookList = await libraryService.GetBooks(authTokens.Token);
+            foreach (var item in bookList)
             {
                 dt.Rows.Add(item.Id, item.Title, item.Author, item.Publisher, item.IsAvail);
             }
